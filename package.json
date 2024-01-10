@@ -1,17 +1,23 @@
 {
   "name": "zenbittech-test",
   "private": true,
+  "license": "UNLICENSED",
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "clean": "turbo run clean && rm -rf node_modules"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
+    "eslint": "^8.56.0",
     "prettier": "^3.1.1",
-    "turbo": "latest"
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "turbo": "latest",
+    "typescript": "^5.3.3"
   },
   "packageManager": "pnpm@8.9.0",
   "engines": {
