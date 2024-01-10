@@ -7,7 +7,11 @@
     "start:dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint . --max-warnings 0",
+    "type-check": "tsc --noEmit",
+    "lint": "pnpm prettier --check && pnpm eslint",
+    "lint:fix": "pnpm prettier --write && pnpm eslint --fix",
+    "prettier": "prettier --no-error-on-unmatched-pattern ./**/*.{ts,tsx,js,jsx}",
+    "eslint": "eslint --no-error-on-unmatched-pattern --max-warnings=0 ./**/*.{ts,tsx,js,jsx}",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "dependencies": {
@@ -19,6 +23,7 @@
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
+    "@repo/prettier-config": "workspace:*",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

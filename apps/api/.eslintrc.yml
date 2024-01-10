@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://json.schemastore.org/eslintrc
+
+extends:
+  - '@repo/eslint-config/base.yml'
+
+env:
+  node: true
+  browser: false
+
+parserOptions:
+  project: true
+
+rules:
+  '@typescript-eslint/interface-name-prefix': off
+  '@typescript-eslint/explicit-function-return-type': off
+  '@typescript-eslint/explicit-module-boundary-types': off

@@ -5,8 +5,9 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
-    "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "type-check": "turbo run type-check --continue",
+    "lint": "turbo run lint --continue",
+    "lint:fix": "turbo run lint:fix",
     "clean": "turbo run clean && rm -rf node_modules"
   },
   "devDependencies": {

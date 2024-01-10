@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=https://json.schemastore.org/eslintrc
+
+ignorePatterns:
+  - node_modules
+  - build/*
+  - dist/*
+  - '*.config.js'
+
+parser: '@typescript-eslint/parser'
+
+parserOptions:
+  ecmaVersion: 'latest'
+  sourceType: 'module'
+
+env:
+  es2022: true
+  node: true
+  browser: true
+
+extends:
+  - eslint:recommended
+  - plugin:@typescript-eslint/recommended
+  - prettier
+
+plugins:
+  - '@typescript-eslint'
+  - only-warn
+
+settings:
+  import/resolver:
+    node:
+      extensions:
+        - '.js'
+        - '.jsx'
+        - '.ts'
+        - '.tsx'
+
+overrides:
+  - files: ['*.d.ts']
+    rules:
+      '@typescript-eslint/triple-slash-reference': off
+  - files: ['*.js']
+    rules:
+      '@typescript-eslint/no-var-requires': off
