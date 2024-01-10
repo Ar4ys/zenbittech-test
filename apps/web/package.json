@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
+    "@repo/ts-config": "workspace:*",
     "@repo/prettier-config": "workspace:*",
     "@types/node": "^20",
     "@types/react": "^18",

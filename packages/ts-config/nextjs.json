@@ -3,11 +3,21 @@
   "display": "Next.js",
   "extends": "./base.json",
   "compilerOptions": {
-    "plugins": [{ "name": "next" }],
     "module": "ESNext",
     "moduleResolution": "Bundler",
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
+    ],
+    "types": [],
     "allowJs": true,
     "jsx": "preserve",
-    "noEmit": true
+    "noEmit": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
   }
 }

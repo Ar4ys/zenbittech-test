@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Default",
+  "compilerOptions": {
+    "target": "ES2022",
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "lib": [
+      "ES2022"
+    ],
+    "types": [],
+    "module": "ESNext",
+    "moduleDetection": "force",
+    "moduleResolution": "Bundler",
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "allowSyntheticDefaultImports": true,
+    "preserveWatchOutput": true,
+    "declaration": false,
+    "jsx": "preserve",
+    "sourceMap": true,
+    "noEmitOnError": false,
+    "useUnknownInCatchVariables": true,
+    "incremental": true,
+  }
+}

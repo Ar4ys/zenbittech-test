@@ -1,5 +1,5 @@
 {
-  "extends": "@repo/typescript-config/base.json",
+  "extends": "@repo/ts-config/base.json",
   "include": ["test"],
   "exclude": ["node_modules"]
 }
