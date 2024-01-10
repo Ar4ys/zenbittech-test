@@ -1,12 +1,28 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
 import { Ok, Result } from 'ts-results';
 
 import { BadRequestError } from '@repo/shared/errors';
 import { LOL } from '@repo/shared/test';
 
+import { AppDb } from '@/db';
+
+import { DbService } from '../db';
+
 @Injectable()
-export class AppService {
-  getHello(): Result<string, BadRequestError> {
+export class AppService implements OnApplicationBootstrap {
+  private readonly db: AppDb;
+
+  constructor(private readonly dbService: DbService) {
+    this.db = this.dbService.db;
+  }
+
+  async getHello(): Promise<Result<string, BadRequestError>> {
+    const user = await this.db.query.user.findFirst();
+    console.log('user', user);
     return Ok(LOL);
+  }
+
+  async onApplicationBootstrap() {
+    await this.dbService.migrate();
   }
 }

@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 
 import { environmentValidator, getEnvironmentFilePath } from '@/environment';
 
+import { DbModule } from '../db';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
@@ -13,6 +14,7 @@ import { AppService } from './app.service';
       isGlobal: true,
       envFilePath: getEnvironmentFilePath(),
     }),
+    DbModule,
   ],
   controllers: [AppController],
   providers: [AppService],

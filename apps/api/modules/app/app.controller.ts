@@ -15,7 +15,7 @@ export class AppController {
   @TsRestHandler(contract.test)
   getHello() {
     return tsRestHandler(contract.test, async () => {
-      const result = this.appService.getHello();
+      const result = await this.appService.getHello();
       return toTsRestResponse(HttpStatus.OK, result);
     });
   }
