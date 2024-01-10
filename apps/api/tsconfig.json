@@ -9,7 +9,6 @@
     "moduleResolution": "Node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "outDir": "./dist",
     "baseUrl": "./",
   }
 }

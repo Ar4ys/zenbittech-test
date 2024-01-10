@@ -2,7 +2,7 @@ import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory, Reflector } from '@nestjs/core';
 
-// import { HttpExceptionFilter } from './common/exception-filters/http-exception.filter';
+import { HttpExceptionFilter } from './common/exception-filters';
 // import { ValidationException } from './common/exceptions/validation-bad-request.exception';
 import { Environment, NodeEnv } from './environment';
 import { AppModule } from './modules/app';
@@ -28,7 +28,7 @@ async function bootstrap(): Promise<void> {
   //     excludeExtraneousValues: true,
   //   }),
   // );
-  // app.useGlobalFilters(new HttpExceptionFilter());
+  app.useGlobalFilters(new HttpExceptionFilter());
 
   await app.listen(apiPort);
 }
