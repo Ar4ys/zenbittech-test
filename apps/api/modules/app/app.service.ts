@@ -2,7 +2,6 @@ import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
 import { Ok, Result } from 'ts-results';
 
 import { BadRequestError } from '@repo/shared/errors';
-import { LOL } from '@repo/shared/test';
 
 import { AppDb } from '@/db';
 
@@ -17,9 +16,8 @@ export class AppService implements OnApplicationBootstrap {
   }
 
   async getHello(): Promise<Result<string, BadRequestError>> {
-    const user = await this.db.query.user.findFirst();
-    console.log('user', user);
-    return Ok(LOL);
+    const user = await this.db.query.users.findFirst();
+    return Ok(user?.email ?? 'nope');
   }
 
   async onApplicationBootstrap() {

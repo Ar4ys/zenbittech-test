@@ -4,6 +4,6 @@
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "types": ["node"]
   },
-  "include": ["test", "contracts", "constants", "errors", "utils"],
+  "include": ["contracts", "constants", "errors", "utils"],
   "exclude": ["node_modules"]
 }
