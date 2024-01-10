@@ -1,22 +1,36 @@
-// import { ConfigService } from '@nestjs/config';
-import { NestFactory } from '@nestjs/core';
+import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { NestFactory, Reflector } from '@nestjs/core';
 
+// import { HttpExceptionFilter } from './common/exception-filters/http-exception.filter';
+// import { ValidationException } from './common/exceptions/validation-bad-request.exception';
+import { Environment, NodeEnv } from './environment';
 import { AppModule } from './modules/app';
 
-async function bootstrap() {
+async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
-  // TODO: Setup ConfigService
-  // const configService = app.get(ConfigService);
-  // const isProduction = configService.get('isProduction', { infer: true });
+  const configService = app.get(ConfigService<Environment, true>);
+  const apiPort = configService.get('API_PORT', { infer: true });
+  const isProduction = configService.get('NODE_ENV', { infer: true }) === NodeEnv.PRODUCTION;
 
-  // if (isProduction) app.useLogger(['fatal', 'error']);
-  // TODO: TS-Rest does not support global prefix from nest
-  // app.setGlobalPrefix('api');
+  if (isProduction) app.useLogger(['fatal', 'error']);
 
-  // app.useGlobalFilters(new HttpExceptionFilter())
+  app.setGlobalPrefix('api');
+  // app.useGlobalPipes(
+  //   new ValidationPipe({
+  //     whitelist: true,
+  //     validateCustomDecorators: true,
+  //     exceptionFactory: (errors) => new ValidationException(errors),
+  //   }),
+  // );
+  // app.useGlobalInterceptors(
+  //   new ClassSerializerInterceptor(app.get(Reflector), {
+  //     excludeExtraneousValues: true,
+  //   }),
+  // );
+  // app.useGlobalFilters(new HttpExceptionFilter());
 
-  await app.listen(3000);
-  // await app.listen(configService.get('PORT', { infer: true }));
+  await app.listen(apiPort);
 }
 
 bootstrap();
