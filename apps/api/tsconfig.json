@@ -3,12 +3,15 @@
   "ts-node": {
     "swc": true,
     "transpileOnly": true,
+    "require": ["tsconfig-paths/register"],
   },
   "compilerOptions": {
     "module": "CommonJS",
     "moduleResolution": "Node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "baseUrl": "./",
+    "paths": {
+      "@/*": ["./*"]
+    },
   }
 }

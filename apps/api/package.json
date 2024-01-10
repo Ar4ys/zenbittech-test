@@ -5,9 +5,10 @@
   "license": "UNLICENSED",
   "scripts": {
     "format": "prettier --write \"**/*.ts\" \"test/**/*.ts\"",
-    "start:prod": "ts-node ./main.ts",
-    "start:dev": "ts-node-dev --transpile-only ./main.ts",
-    "start:debug": "ts-node-dev --inspect --transpile-only ./main.ts",
+    "start:prod": "NODE_ENV=production ts-node ./main.ts",
+    "start:staging": "NODE_ENV=staging ts-node ./main.ts",
+    "start:dev": "NODE_ENV=development ts-node-dev --rs --transpile-only --require tsconfig-paths/register ./main.ts",
+    "start:debug": "NODE_ENV=development ts-node-dev --inspect --rs --transpile-only --require tsconfig-paths/register ./main.ts",
     "type-check": "tsc --noEmit",
     "lint": "pnpm prettier --check && pnpm eslint",
     "lint:fix": "pnpm prettier --write && pnpm eslint --fix",
