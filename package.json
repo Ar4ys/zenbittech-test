@@ -21,6 +21,9 @@
   },
   "packageManager": "pnpm@8.9.0",
   "engines": {
-    "node": ">=18"
+    "node": ">=18",
+    "npm": "Please use pnpm",
+    "pnpm": ">=8.8.0",
+    "yarn": "Please use pnpm"
   }
 }

@@ -5,5 +5,10 @@
   "license": "UNLICENSED",
   "scripts": {
     "clean": "rm -rf .turbo && rm -rf node_modules"
+  },
+  "engines": {
+    "npm": "Please use pnpm",
+    "pnpm": ">=8.8.0",
+    "yarn": "Please use pnpm"
   }
 }

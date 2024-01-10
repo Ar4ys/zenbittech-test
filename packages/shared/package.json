@@ -10,5 +10,10 @@
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*"
+  },
+  "engines": {
+    "npm": "Please use pnpm",
+    "pnpm": ">=8.8.0",
+    "yarn": "Please use pnpm"
   }
 }
