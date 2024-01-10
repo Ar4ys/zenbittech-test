@@ -1,5 +1,9 @@
 {
   "extends": "@repo/ts-config/base.json",
-  "include": ["test"],
+  "compilerOptions": {
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "types": ["node"]
+  },
+  "include": ["test", "contracts", "constants", "errors", "utils"],
   "exclude": ["node_modules"]
 }

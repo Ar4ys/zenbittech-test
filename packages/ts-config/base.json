@@ -23,5 +23,6 @@
     "noEmitOnError": false,
     "useUnknownInCatchVariables": true,
     "incremental": true,
+    "noImplicitOverride": true
   }
 }
