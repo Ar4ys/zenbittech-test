@@ -13,12 +13,19 @@
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
+    "@repo/prettier-config": "workspace:*",
     "@repo/ts-config": "workspace:*",
-    "@repo/prettier-config": "workspace:*"
+    "@ts-rest/core": "^3.31.0",
+    "@types/node": "^20.10.8",
+    "zod": "^3.22.4"
   },
   "engines": {
     "npm": "Please use pnpm",
     "pnpm": ">=8.8.0",
     "yarn": "Please use pnpm"
+  },
+  "peerDependencies": {
+    "@ts-rest/core": "^3.31.0",
+    "zod": "^3.22.4"
   }
 }

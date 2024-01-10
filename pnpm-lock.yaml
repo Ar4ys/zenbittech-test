@@ -50,6 +50,12 @@ importers:
       '@repo/shared':
         specifier: workspace:*
         version: link:../../packages/shared
+      '@ts-rest/core':
+        specifier: ^3.31.0
+        version: 3.31.0(zod@3.22.4)
+      '@ts-rest/nest':
+        specifier: ^3.31.0
+        version: 3.31.0(@nestjs/common@10.3.0)(@nestjs/core@10.3.0)(rxjs@7.8.1)(zod@3.22.4)
       nestjs-zod:
         specifier: ^3.0.0
         version: 3.0.0(@nestjs/common@10.3.0)(@nestjs/core@10.3.0)(zod@3.22.4)
@@ -196,6 +202,15 @@ importers:
       '@repo/ts-config':
         specifier: workspace:*
         version: link:../ts-config
+      '@ts-rest/core':
+        specifier: ^3.31.0
+        version: 3.31.0(zod@3.22.4)
+      '@types/node':
+        specifier: ^20.10.8
+        version: 20.10.8
+      zod:
+        specifier: ^3.22.4
+        version: 3.22.4
 
   packages/ts-config: {}
 
@@ -1121,6 +1136,33 @@ packages:
     resolution: {integrity: sha512-OvjF+z51L3ov0OyAU0duzsYuvO01PH7x4t6DJx+guahgTnBHkhJdG7soQeTSFLWN3efnHyibZ4Z8l2EuWwJN3A==}
     dev: true
 
+  /@ts-rest/core@3.31.0(zod@3.22.4):
+    resolution: {integrity: sha512-0hc/z1LA+9pedRCNYK5n+3LRUkxqdEtb7iO5FRDEcIdEVLLVs8D+moBiiyvpGkqKTtWJ9DVXYDgX4r9jOMWroQ==}
+    peerDependencies:
+      zod: ^3.22.3
+    peerDependenciesMeta:
+      zod:
+        optional: true
+    dependencies:
+      zod: 3.22.4
+
+  /@ts-rest/nest@3.31.0(@nestjs/common@10.3.0)(@nestjs/core@10.3.0)(rxjs@7.8.1)(zod@3.22.4):
+    resolution: {integrity: sha512-UZO3ps9hMiYCXwydmrfXNSzaeC3sH3rAHCDK0GDzPkQEy/tFj312bJk/ZilK+E+4qhND49gTeOGTqEmkUsGNdA==}
+    peerDependencies:
+      '@nestjs/common': ^9.0.0 || ^10.0.0
+      '@nestjs/core': ^9.0.0 || ^10.0.0
+      rxjs: ^7.1.0
+      zod: ^3.22.3
+    peerDependenciesMeta:
+      zod:
+        optional: true
+    dependencies:
+      '@nestjs/common': 10.3.0(reflect-metadata@0.1.14)(rxjs@7.8.1)
+      '@nestjs/core': 10.3.0(@nestjs/common@10.3.0)(@nestjs/platform-express@10.3.0)(reflect-metadata@0.1.14)(rxjs@7.8.1)
+      rxjs: 7.8.1
+      zod: 3.22.4
+    dev: false
+
   /@tsconfig/node10@1.0.9:
     resolution: {integrity: sha512-jNsYVVxU8v5g43Erja32laIDHXeoNvFEpX33OK4d6hljo3jDhCBDhx5dhCCTMWUojscpAagGiRkBKxpdl9fxqA==}
     dev: true
@@ -1262,6 +1304,12 @@ packages:
 
   /@types/node@20.10.6:
     resolution: {integrity: sha512-Vac8H+NlRNNlAmDfGUP7b5h/KA+AtWIzuXy0E6OyP8f1tCLYAtPvKRRDJjAPqhpCb0t6U2j7/xqAuLEebW2kiw==}
+    dependencies:
+      undici-types: 5.26.5
+    dev: true
+
+  /@types/node@20.10.8:
+    resolution: {integrity: sha512-f8nQs3cLxbAFc00vEU59yf9UyGUftkPaLGfvbVOIDdx2i1b8epBqj2aNGyP19fiyXWvlmZ7qC1XLjAzw/OKIeA==}
     dependencies:
       undici-types: 5.26.5
     dev: true
@@ -6204,4 +6252,3 @@ packages:
 
   /zod@3.22.4:
     resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
-    dev: false

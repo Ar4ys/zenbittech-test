@@ -16,7 +16,6 @@ async function bootstrap(): Promise<void> {
 
   if (isProduction) app.useLogger(['fatal', 'error']);
 
-  app.setGlobalPrefix('api');
   app.useGlobalPipes(new ZodValidationPipe());
   app.useGlobalInterceptors(new ZodSerializerInterceptor(app.get(Reflector)));
   app.useGlobalFilters(new HttpExceptionFilter());
