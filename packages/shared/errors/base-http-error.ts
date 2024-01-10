@@ -17,7 +17,7 @@ export abstract class BaseHttpError extends Error {
     name: TName,
     statusCode: TStatus,
   ) {
-    return class HttpError extends BaseHttpError {
+    return class HttpError extends this {
       static override name = name;
       static override statusCode = statusCode;
       static override zodSchema = super.zodSchema.extend({
