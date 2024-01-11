@@ -4,7 +4,7 @@ import { tw } from '@/utils';
 
 import { Loader } from './loader';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'danger';
+export type ButtonVariant = 'primary' | 'secondary' | 'danger' | 'clear';
 
 export type ButtonProps = ComponentProps<'button'> & {
   variant?: ButtonVariant;
@@ -28,21 +28,25 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref,
   ) => {
+    const buttonClassName =
+      variant !== 'clear'
+        ? tw(
+            'rounded-[10px] px-7 py-4',
+            {
+              primary: 'bg-primary',
+              secondary: 'border border-white bg-transparent',
+              danger: 'bg-error',
+            }[variant],
+          )
+        : undefined;
+
     return (
       <button
         type={type}
         ref={ref}
         onClick={onClick}
         disabled={loading || disabled}
-        className={tw(
-          'rounded-[10px] px-7 py-4',
-          {
-            primary: 'bg-primary',
-            secondary: 'border border-white bg-transparent',
-            danger: 'bg-error',
-          }[variant],
-          className,
-        )}
+        className={tw(buttonClassName, className)}
         {...props}
       >
         {loading ? <Loader className={tw('m-auto', loaderClassName)} /> : children}

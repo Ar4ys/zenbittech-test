@@ -28,7 +28,7 @@ export const movie = c.router(
       method: 'GET',
       path: '/',
       query: z.object({
-        page: z.number().min(0).default(0),
+        page: z.coerce.number().min(0).default(0),
       }),
       responses: {
         [InternalServerError.statusCode]: InternalServerError.zodSchema,

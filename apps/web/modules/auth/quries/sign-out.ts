@@ -24,7 +24,7 @@ export const useSignOut = () => {
     },
     onSuccess() {
       removeUserId();
-      router.push('/login');
+      router.push('/sign-in');
     },
     onError(error) {
       openInfoModal({
