@@ -59,7 +59,7 @@ MoviesPage.Layout = ({ children }) => {
   };
 
   const withCenteredLayout = (children: ReactNode) => (
-    <div className="flex h-full w-full flex-col justify-center px-6">{children}</div>
+    <div className="flex h-full w-full grow flex-col justify-center px-6">{children}</div>
   );
 
   if (isLoading) return withCenteredLayout(<Loader />);
@@ -72,9 +72,9 @@ MoviesPage.Layout = ({ children }) => {
     );
   else if (!hasMovies)
     return withCenteredLayout(
-      <div className="flex w-full flex-col gap-10">
+      <div className="flex w-full flex-col items-center gap-10">
         <h1 className="text-h3 text-center">Your movie list is empty</h1>
-        <Button className="w-full" onClick={redirectToCreateMovie}>
+        <Button className="w-full md:w-fit" onClick={redirectToCreateMovie}>
           Add a new movie
         </Button>
       </div>,
