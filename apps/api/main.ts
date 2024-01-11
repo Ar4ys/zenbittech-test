@@ -1,6 +1,7 @@
 import { Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory, Reflector } from '@nestjs/core';
+import cookieParser from 'cookie-parser';
 import { ZodSerializerInterceptor, ZodValidationPipe } from 'nestjs-zod';
 
 import { HttpExceptionFilter } from './common/exception-filters';
@@ -16,6 +17,7 @@ async function bootstrap(): Promise<void> {
 
   if (isProduction) app.useLogger(['fatal', 'error']);
 
+  app.use(cookieParser());
   app.useGlobalPipes(new ZodValidationPipe());
   app.useGlobalInterceptors(new ZodSerializerInterceptor(app.get(Reflector)));
   app.useGlobalFilters(new HttpExceptionFilter());

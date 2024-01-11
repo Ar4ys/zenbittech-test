@@ -15,9 +15,9 @@ export class AppService implements OnApplicationBootstrap {
     this.db = this.dbService.db;
   }
 
-  async getHello(): Promise<Result<string, BadRequestError>> {
+  async getHello(id: number): Promise<Result<string, BadRequestError>> {
     const user = await this.db.query.users.findFirst();
-    return Ok(user?.email ?? 'nope');
+    return Ok(user?.email ?? `currentUser: ${id}`);
   }
 
   async onApplicationBootstrap() {

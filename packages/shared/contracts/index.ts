@@ -1,13 +1,13 @@
-import { initContract } from '@ts-rest/core';
 import { z } from 'zod';
 
 import { HttpStatus } from '../constants';
 import { BadRequestError } from '../errors';
-
-const c = initContract();
+import { auth } from './auth';
+import { c } from './contract';
 
 export const contract = c.router(
   {
+    auth,
     test: {
       method: 'GET',
       path: '/test',
