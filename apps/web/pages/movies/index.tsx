@@ -53,8 +53,6 @@ MoviesPage.Layout = ({ children }) => {
   const hasMovies = data?.body.movies.length;
 
   const redirectToCreateMovie = () => {
-    console.log('asdsad');
-
     router.push('/movies/create');
   };
 
