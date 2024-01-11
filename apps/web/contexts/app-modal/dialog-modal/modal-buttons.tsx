@@ -15,15 +15,12 @@ export type ModalButtonProps = DialogModalButtonProps & {
 
 const ModalButton: FC<ModalButtonProps> = ({ onPress, buttonText, variant, className }) => {
   return (
-    <Button variant={variant} className={className} onClick={onPress}>
-      <p
-        className={tw(
-          'text-body-regular text-center text-white',
-          variant ? 'text-black-600' : 'text-orange-1000',
-        )}
-      >
-        {buttonText}
-      </p>
+    <Button
+      variant={variant}
+      className={tw('text-body-regular w-full text-center text-white', className)}
+      onClick={onPress}
+    >
+      {buttonText}
     </Button>
   );
 };

@@ -9,9 +9,7 @@ export type DialogModalProps = {
 
 export const DialogModal: FC<DialogModalProps> = ({ children, className }) => {
   return (
-    <div
-      className={tw('bg-black-1000/20 fixed left-0 top-0 z-[2000] flex h-full w-full', className)}
-    >
+    <div className={tw('fixed left-0 top-0 z-[2000] flex h-full w-full bg-black/50', className)}>
       {children}
     </div>
   );

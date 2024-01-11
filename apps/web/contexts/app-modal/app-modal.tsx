@@ -79,8 +79,8 @@ export const ModalProvider = forwardRef<ModalContextProps, { children: ReactNode
           className,
           children: (
             <DefaultDialogModal
-              header={<p className="text-medium-body text-center">{title}</p>}
-              body={<p className="text-black-400 text-regular-caption text-center">{text}</p>}
+              header={<p className="text-h3 text-center">{title}</p>}
+              body={<p className="text-caption text-center text-white">{text}</p>}
               answers={[
                 {
                   buttonText: cancelText,
@@ -109,8 +109,8 @@ export const ModalProvider = forwardRef<ModalContextProps, { children: ReactNode
         return openModal({
           children: (
             <DefaultDialogModal
-              header={<p className="text-medium-body text-center">{title}</p>}
-              body={<p className="text-black-400 text-regular-caption text-center">{text}</p>}
+              header={<p className="text-h3 text-center">{title}</p>}
+              body={<p className="text-caption text-center text-white">{text}</p>}
               answers={[
                 {
                   buttonText: confirmText,
