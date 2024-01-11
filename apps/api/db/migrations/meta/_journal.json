@@ -8,6 +8,13 @@
       "when": 1704930705522,
       "tag": "0000_steady_raider",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1704935720445,
+      "tag": "0001_nifty_thunderbolt",
+      "breakpoints": true
     }
   ]
 }

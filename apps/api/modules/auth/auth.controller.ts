@@ -1,6 +1,7 @@
 import { Controller, Res } from '@nestjs/common';
 import { TsRest, TsRestHandler, tsRestHandler } from '@ts-rest/nest';
 import { Response } from 'express';
+import { Ok } from 'ts-results';
 
 import { HttpStatus } from '@repo/shared/constants';
 import { contract } from '@repo/shared/contracts';
@@ -25,8 +26,8 @@ export class AuthController {
       }
 
       return toTsRestResponse(
-        HttpStatus.CREATED,
         response.map((x) => x.user),
+        HttpStatus.CREATED,
       );
     });
   }
@@ -42,8 +43,8 @@ export class AuthController {
       }
 
       return toTsRestResponse(
-        HttpStatus.OK,
         response.map((x) => x.user),
+        HttpStatus.OK,
       );
     });
   }
@@ -52,7 +53,7 @@ export class AuthController {
   async postSignOut(@Res({ passthrough: true }) res: Response) {
     return tsRestHandler(contract.auth.signOut, async () => {
       res.clearCookie(JWT_COOKIE_NAME);
-      return { status: HttpStatus.OK, body: { success: true as const } };
+      return toTsRestResponse(Ok({ success: true }), HttpStatus.OK);
     });
   }
 }

@@ -20,7 +20,7 @@ export class AppController {
   getHello(@User() user: UserJwtPayloadDto) {
     return tsRestHandler(contract.test, async () => {
       const result = await this.appService.getHello(user.userId);
-      return toTsRestResponse(HttpStatus.OK, result);
+      return toTsRestResponse(result, HttpStatus.OK);
     });
   }
 }

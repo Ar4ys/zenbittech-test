@@ -1,17 +1,20 @@
 import { z } from 'zod';
 
 import { HttpStatus } from '../constants';
-import { BadRequestError } from '../errors';
+import { BadRequestError, UnauthorizedError } from '../errors';
 import { auth } from './auth';
-import { c } from './contract';
+import { authGuardSchema, c } from './contract';
+import { movie } from './movie';
 
 export const contract = c.router(
   {
     auth,
+    movie,
     test: {
       method: 'GET',
       path: '/test',
       responses: {
+        [UnauthorizedError.statusCode]: authGuardSchema,
         [BadRequestError.statusCode]: BadRequestError.zodSchema,
         [HttpStatus.OK]: z.string(),
       },

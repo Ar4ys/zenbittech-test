@@ -9,6 +9,10 @@ const portScheme = z.coerce.number().positive().max(65535);
 export const environmentSchema = z.object({
   NODE_ENV: z.nativeEnum(NodeEnv),
   API_PORT: portScheme.default(3000),
+  FRONTEND_URL: z
+    .string()
+    .url()
+    .transform((url) => (url.endsWith('/') ? url.slice(0, -1) : url)),
   DB_HOST: z.string().default('localhost'),
   DB_PORT: portScheme.default(5432),
   DB_USERNAME: z.string(),

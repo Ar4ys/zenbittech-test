@@ -1,10 +1,13 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { ServeStaticModule } from '@nestjs/serve-static';
 
 import { environmentValidator, getEnvironmentFilePath } from '@/environment';
 
 import { AuthModule } from '../auth/auth.module';
 import { DbModule } from '../db';
+import { UPLOAD_PATH } from '../image';
+import { MovieModule } from '../movie';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
@@ -17,6 +20,11 @@ import { AppService } from './app.service';
     }),
     DbModule,
     AuthModule,
+    ServeStaticModule.forRoot({
+      rootPath: UPLOAD_PATH,
+      exclude: ['/api/(.*)'],
+    }),
+    MovieModule,
   ],
   controllers: [AppController],
   providers: [AppService],
