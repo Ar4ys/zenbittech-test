@@ -1,5 +1,6 @@
 import { ModalProvider } from '@/contexts/app-modal';
 
+import '@/utils/zod-i18n';
 import '@/styles/globals.css';
 
 import type { AppProps } from 'next/app';
