@@ -1,4 +1,5 @@
 import { GetServerSideProps } from 'next';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useController } from 'react-hook-form';
 
@@ -15,6 +16,7 @@ import { NextPageWithLayout } from '../_app';
 
 const CreateMoviePage: NextPageWithLayout = () => {
   const isMobile = useIsMobile();
+  const router = useRouter();
   const { control, handleSubmit } = useCreateMovieForm();
   const { mutate: createMovie, isPending } = useCreateMovie();
   const [isMobileDeffered, setIsMobileDeffered] = useState(false);
@@ -30,6 +32,8 @@ const CreateMoviePage: NextPageWithLayout = () => {
   const onSubmit = handleSubmit((values) => {
     createMovie({ body: values });
   });
+
+  const handleCancel = () => router.back();
 
   const handleImagePicker = (file: File) => {
     imageField.onBlur();
@@ -50,7 +54,7 @@ const CreateMoviePage: NextPageWithLayout = () => {
         />
       </div>
       <div className="flex gap-4">
-        <Button type="button" variant="secondary" className="w-full">
+        <Button type="button" variant="secondary" className="w-full" onClick={handleCancel}>
           Cancel
         </Button>
         <Button type="submit" className="w-full" loading={isPending}>
@@ -85,7 +89,7 @@ const CreateMoviePage: NextPageWithLayout = () => {
         />
         <div className="pt-16" />
         <div className="flex gap-4">
-          <Button type="button" variant="secondary" className="w-full">
+          <Button type="button" variant="secondary" className="w-full" onClick={handleCancel}>
             Cancel
           </Button>
           <Button type="submit" className="w-full" loading={isPending}>
