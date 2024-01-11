@@ -1,10 +1,11 @@
 import { dehydrate, QueryClient } from '@tanstack/react-query';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
 
 import { Button } from '@/components';
 import { Loader } from '@/components/loader';
+import { Pager } from '@/components/pager';
 import { AddCircleIcon, LogoutIcon } from '@/icons';
 import { useSignOut } from '@/modules/auth';
 import { getPaginatedMovies, moviesQueryKeys, useGetPaginatedMovies } from '@/modules/movies';
@@ -13,25 +14,30 @@ import { getSession } from '@/utils';
 import { NextPageWithLayout } from './_app';
 
 const MoviesPage: NextPageWithLayout = () => {
-  const { data } = useGetPaginatedMovies(0);
+  const [page, setPage] = useState(0);
+  const { data } = useGetPaginatedMovies(page);
 
   const movies = data?.body.movies ?? [];
+  const totalPages = data?.body.totalPages ?? 0;
 
   return (
-    <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4">
-      {movies.map((movie) => (
-        <div
-          className="bg-card w-full overflow-hidden rounded-xl min-[400px]:min-w-[180px] md:max-h-[504px] md:max-w-[282px]"
-          key={movie.id}
-        >
-          <img src={movie.image.url} className="h-[75%] w-full object-cover" />
-          <div className="flex flex-col gap-4 p-3">
-            <h3 className="text-body-regular">{movie.title}</h3>
-            <p className="text-body-small">{movie.publishingYear}</p>
+    <>
+      <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4">
+        {movies.map((movie) => (
+          <div
+            className="bg-card w-full overflow-hidden rounded-xl min-[400px]:min-w-[180px] md:max-h-[504px] md:max-w-[282px]"
+            key={movie.id}
+          >
+            <img src={movie.image.url} className="h-[75%] w-full object-cover" />
+            <div className="flex flex-col gap-4 p-3">
+              <h3 className="text-body-regular">{movie.title}</h3>
+              <p className="text-body-small">{movie.publishingYear}</p>
+            </div>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+      <Pager currentPage={page} totalPages={totalPages} onPage={(page) => setPage(page)} />
+    </>
   );
 };
 
@@ -70,15 +76,21 @@ MoviesPage.Layout = ({ children }) => {
     );
   else
     return (
-      <div className="mx-auto flex h-full w-full max-w-[1200px] flex-col items-center px-6">
-        <div className="flex w-full justify-between py-20">
-          <div className="flex gap-3">
+      <div className="mx-auto flex h-full w-full max-w-[1200px] flex-col items-center gap-20 px-6 py-20 md:gap-[120px] md:pt-[120px]">
+        <div className="flex w-full justify-between">
+          <div className="flex items-center gap-3">
             <h1 className="text-h3">My movies</h1>
             <Button variant="clear" onClick={redirectToCreateMovie}>
               <AddCircleIcon width={24} height={24} />
             </Button>
           </div>
-          <Button variant="clear" loading={isSignOutLoading} onClick={() => signOut({})}>
+          <Button
+            variant="clear"
+            loading={isSignOutLoading}
+            onClick={() => signOut({})}
+            className="flex items-center gap-3"
+          >
+            <span className="text-body-regular hidden md:inline">Logout</span>
             <LogoutIcon />
           </Button>
         </div>
