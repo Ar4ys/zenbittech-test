@@ -2,14 +2,16 @@ import { Button } from '@/components';
 import { FormCheckbox } from '@/components/form-checkbox';
 import { FormField } from '@/components/form-field';
 import { useSignInForm } from '@/modules';
+import { useSignIn } from '@/modules/auth/quries';
 
 import { NextPageWithLayout } from './_app';
 
 const SignInPage: NextPageWithLayout = () => {
   const { control, handleSubmit } = useSignInForm();
+  const { mutate: signIn } = useSignIn();
 
-  const onSubmit = handleSubmit(() => {
-    // TODO
+  const onSubmit = handleSubmit((values) => {
+    signIn({ body: values });
   });
 
   return (
