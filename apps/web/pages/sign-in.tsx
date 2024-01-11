@@ -18,8 +18,8 @@ const SignInPage: NextPageWithLayout = () => {
   });
 
   return (
-    <div className="w-full px-6">
-      <h1 className="mb-10 text-center text-h2">Sign in</h1>
+    <div className="w-full px-6 sm:max-w-[300px]">
+      <h1 className="text-h2 mb-10 text-center">Sign in</h1>
       <form className="flex w-full flex-col items-center gap-6" onSubmit={onSubmit}>
         <FormField
           control={control}
@@ -46,7 +46,11 @@ const SignInPage: NextPageWithLayout = () => {
 };
 
 SignInPage.Layout = ({ children }) => {
-  return <div className="flex min-h-full w-full grow flex-col justify-center">{children}</div>;
+  return (
+    <div className="flex min-h-full w-full grow flex-col items-center justify-center">
+      {children}
+    </div>
+  );
 };
 
 SignInPage.Layout.displayName = 'SignInPage.Layout';
