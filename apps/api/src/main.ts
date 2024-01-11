@@ -23,6 +23,7 @@ async function bootstrap(): Promise<void> {
   app.useGlobalPipes(new ZodValidationPipe());
   app.useGlobalInterceptors(new ZodSerializerInterceptor(app.get(Reflector)));
   app.useGlobalFilters(new HttpExceptionFilter());
+  app.enableCors({ origin: '*' });
 
   await app.listen(apiPort, () => bootstrapLogger.log(`Listening on port ${apiPort}`));
 }

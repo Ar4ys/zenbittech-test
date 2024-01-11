@@ -8,7 +8,7 @@ import { contract } from '@repo/shared/contracts';
 import { toTsRestResponse } from '@repo/shared/utils';
 
 import { AuthService } from './auth.service';
-import { JWT_COOKIE_NAME } from './constants';
+import { COOKIE_MAX_AGE, JWT_COOKIE_NAME } from './constants';
 
 @TsRest({ validateResponses: true })
 @Controller()
@@ -22,7 +22,9 @@ export class AuthController {
       const response = await this.authService.signUp(data, remember);
 
       if (response.ok) {
-        res.cookie(JWT_COOKIE_NAME, response.val.token);
+        res.cookie(JWT_COOKIE_NAME, response.val.token, {
+          maxAge: COOKIE_MAX_AGE,
+        });
       }
 
       return toTsRestResponse(
@@ -39,7 +41,10 @@ export class AuthController {
       const response = await this.authService.signIn(data, remember);
 
       if (response.ok) {
-        res.cookie(JWT_COOKIE_NAME, response.val.token);
+        res.cookie(JWT_COOKIE_NAME, response.val.token, {
+          maxAge: COOKIE_MAX_AGE,
+          sameSite: 'strict',
+        });
       }
 
       return toTsRestResponse(
