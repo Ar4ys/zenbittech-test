@@ -45,7 +45,11 @@ const CreateMoviePage: NextPageWithLayout = () => {
       <FormField control={control} name="title" placeholder="Title" />
       <FormField control={control} name="publishingYear" placeholder="Publishing year" />
       <div>
-        <MovieImagePicker className="h-[372px] w-full" onUpload={handleImagePicker} />
+        <MovieImagePicker
+          className="h-[372px] w-full"
+          file={imageField.value}
+          onUpload={handleImagePicker}
+        />
         <FormError
           errorText={
             imageFieldState.isTouched &&
@@ -70,7 +74,11 @@ const CreateMoviePage: NextPageWithLayout = () => {
       onSubmit={onSubmit}
     >
       <div className="grow">
-        <MovieImagePicker className="h-[473px] w-full max-w-[504px]" onUpload={handleImagePicker} />
+        <MovieImagePicker
+          className="h-[473px] w-full max-w-[504px]"
+          file={imageField.value}
+          onUpload={handleImagePicker}
+        />
         <FormError
           errorText={
             imageFieldState.isTouched &&
