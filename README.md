@@ -10,6 +10,7 @@ Prerequisites:
 
 Steps:
 
+- Install dependencies: `pnpm install`
 - Start Docker environment: `pnpm -w docker:up`
 - Start api: `cd apps/api && pnpm start:dev`
 - Start web: `cd apps/web && pnpm start:dev`
