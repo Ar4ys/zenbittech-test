@@ -66,7 +66,7 @@ export const Field = forwardRef<HTMLInputElement, FieldProps>(
     ref,
   ): ReactElement | null => {
     return (
-      <div className={tw('flex max-w-full flex-col gap-2', className)}>
+      <div className={tw('flex w-full flex-col gap-2', className)}>
         {label && (
           <p className={tw('text-body-extra-small', error ? 'text-error' : 'text-input')}>
             {label}

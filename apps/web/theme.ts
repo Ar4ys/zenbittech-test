@@ -13,12 +13,12 @@ export const Color = {
 };
 
 export const TextVariant = {
-  HeadingOne: '.text-heading-one',
-  HeadingTwo: '.text-heading-two',
-  HeadingThree: '.text-heading-three',
-  HeadingFour: '.text-heading-four',
-  HeadingFive: '.text-heading-five',
-  HeadingSix: '.text-heading-six',
+  HeadingOne: '.text-h1',
+  HeadingTwo: '.text-h2',
+  HeadingThree: '.text-h3',
+  HeadingFour: '.text-h4',
+  HeadingFive: '.text-h5',
+  HeadingSix: '.text-h6',
   BodyLarge: '.text-body-large',
   BodyRegular: '.text-body-regular',
   BodySmall: '.text-body-small',

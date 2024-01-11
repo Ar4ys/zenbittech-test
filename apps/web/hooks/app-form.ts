@@ -32,8 +32,11 @@ export interface UseFormProps<TFieldValues extends FieldValues = FieldValues, TC
   shouldValidateOnSubmit?: boolean;
 }
 
-export interface UseFormReturn<TFieldValues extends FieldValues = FieldValues, TContext = unknown>
-  extends UseOriginalFormReturn<TFieldValues, TContext> {
+export interface UseFormReturn<
+  TFieldValues extends FieldValues = FieldValues,
+  TContext = unknown,
+  TTransformedValues extends FieldValues | undefined = undefined,
+> extends UseOriginalFormReturn<TFieldValues, TContext, TTransformedValues> {
   /**
    * This function allows you to dynamically touch a registered field and have the options to
    * validate and update the form state.
@@ -41,14 +44,22 @@ export interface UseFormReturn<TFieldValues extends FieldValues = FieldValues, T
   setTouched: UseFormSetTouched<TFieldValues>;
 }
 
-export function useAppForm<TFieldValues extends FieldValues = FieldValues, TContext = unknown>({
+export function useAppForm<
+  TFieldValues extends FieldValues = FieldValues,
+  TContext = unknown,
+  TTransformedValues extends FieldValues | undefined = undefined,
+>({
   shouldValidateOnSubmit = true,
   mode = 'onTouched',
   ...props
-}: UseFormProps<TFieldValues, TContext> = {}): UseFormReturn<TFieldValues, TContext> {
+}: UseFormProps<TFieldValues, TContext> = {}): UseFormReturn<
+  TFieldValues,
+  TContext,
+  TTransformedValues
+> {
   // `useOriginalForm` always returns the same object reference, so it is safe
   //  to use it as a useCallback dependency
-  const form = useOriginalForm<TFieldValues, TContext>({
+  const form = useOriginalForm<TFieldValues, TContext, TTransformedValues>({
     mode,
     ...props,
   });
@@ -64,7 +75,7 @@ export function useAppForm<TFieldValues extends FieldValues = FieldValues, TCont
     [form],
   );
 
-  const handleSubmit = useCallback<UseFormHandleSubmit<TFieldValues>>(
+  const handleSubmit = useCallback<UseFormHandleSubmit<TFieldValues, TTransformedValues>>(
     (...args) =>
       (...eventArgs) => {
         if (shouldValidateOnSubmit) {

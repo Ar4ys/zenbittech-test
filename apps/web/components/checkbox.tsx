@@ -42,7 +42,7 @@ export const Checkbox: FC<CheckboxProps> = ({
           className={tw(
             'relative transition-all delay-100 ease-in-out  before:transition-all before:delay-100 before:ease-in-out  after:transition-all after:delay-100 after:ease-in-out',
             'before:bg-input before:flex before:h-4 before:w-4 before:rounded-[5px]',
-            'after:absolute after:left-1.5 after:top-1.5 after:block after:h-2 after:w-3 after:-rotate-45 after:border-b-2 after:border-l-2 after:border-white after:bg-transparent after:opacity-0',
+            'after:absolute after:left-1 after:top-1.5 after:block after:h-1 after:w-2 after:-rotate-45 after:border-b after:border-l after:border-white after:bg-transparent after:opacity-0',
             isChecked && 'after:opacity-100',
             !!error && 'border-error border',
           )}
