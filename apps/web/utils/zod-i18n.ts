@@ -1,6 +1,6 @@
 import { defaultErrorMap, z, ZodErrorMap, ZodIssueCode, ZodParsedType } from 'zod';
 
-const formI18n = {
+export const formI18n = {
   required: 'This field must not be empty',
   max_one: 'This field must be less than {{count}} character long',
   max_other: 'This field must be less than {{count}} characters long',

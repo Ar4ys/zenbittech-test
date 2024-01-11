@@ -46,7 +46,11 @@ export const movie = c.router(
       path: '/',
       body: z.object({
         image: z.custom<File>(() => true),
-        title: z.string().min(3),
+        title: z
+          .string()
+          // For some reason strings in `FormData` have quotes around them
+          .min(3 + 2)
+          .transform((value) => value.slice(1, -1)),
         publishingYear: z.coerce.number().min(1800),
       }),
       responses: {
@@ -65,7 +69,11 @@ export const movie = c.router(
       body: z
         .object({
           image: z.custom<File>(() => true),
-          title: z.string().min(3),
+          title: z
+            .string()
+            // For some reason strings in `FormData` have quotes around them
+            .min(3 + 2)
+            .transform((value) => value.slice(1, -1)),
           publishingYear: z.coerce.number().min(1800),
         })
         .partial(),

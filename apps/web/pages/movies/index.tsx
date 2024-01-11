@@ -5,13 +5,14 @@ import { ReactNode, useState } from 'react';
 
 import { Button } from '@/components';
 import { Loader } from '@/components/loader';
+import { PageWrapper } from '@/components/page-wrapper';
 import { Pager } from '@/components/pager';
 import { AddCircleIcon, LogoutIcon } from '@/icons';
 import { useSignOut } from '@/modules/auth';
 import { getPaginatedMovies, moviesQueryKeys, useGetPaginatedMovies } from '@/modules/movies';
 import { getSession } from '@/utils';
 
-import { NextPageWithLayout } from './_app';
+import { NextPageWithLayout } from '../_app';
 
 const MoviesPage: NextPageWithLayout = () => {
   const [page, setPage] = useState(0);
@@ -51,7 +52,11 @@ MoviesPage.Layout = ({ children }) => {
 
   const hasMovies = data?.body.movies.length;
 
-  const redirectToCreateMovie = () => router.push('/movies/create');
+  const redirectToCreateMovie = () => {
+    console.log('asdsad');
+
+    router.push('/movies/create');
+  };
 
   const withCenteredLayout = (children: ReactNode) => (
     <div className="flex h-full w-full flex-col justify-center px-6">{children}</div>
@@ -76,14 +81,16 @@ MoviesPage.Layout = ({ children }) => {
     );
   else
     return (
-      <div className="mx-auto flex h-full w-full max-w-[1200px] flex-col items-center gap-20 px-6 py-20 md:gap-[120px] md:pt-[120px]">
-        <div className="flex w-full justify-between">
+      <PageWrapper
+        left={
           <div className="flex items-center gap-3">
             <h1 className="text-h3">My movies</h1>
             <Button variant="clear" onClick={redirectToCreateMovie}>
               <AddCircleIcon width={24} height={24} />
             </Button>
           </div>
+        }
+        right={
           <Button
             variant="clear"
             loading={isSignOutLoading}
@@ -93,9 +100,10 @@ MoviesPage.Layout = ({ children }) => {
             <span className="text-body-regular hidden md:inline">Logout</span>
             <LogoutIcon />
           </Button>
-        </div>
+        }
+      >
         {children}
-      </div>
+      </PageWrapper>
     );
 };
 
