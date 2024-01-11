@@ -9,7 +9,7 @@ export const Loader: FC<LoaderProps> = ({ wrapperClassName, className, ...props 
     <div
       {...props}
       className={tw(
-        'border-input border-t-primary inline-block h-5 w-5 animate-spin rounded-full border-4',
+        'inline-block h-5 w-5 animate-spin rounded-full border-4 border-input border-t-primary',
         className,
       )}
     />

@@ -19,7 +19,7 @@ const SignUpPage: NextPageWithLayout = () => {
 
   return (
     <div className="w-full px-6">
-      <h1 className="text-h2 mb-10 text-center">Sign up</h1>
+      <h1 className="mb-10 text-center text-h2">Sign up</h1>
       <form className="flex w-full flex-col items-center gap-6" onSubmit={onSubmit}>
         <FormField
           control={control}

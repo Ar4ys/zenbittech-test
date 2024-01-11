@@ -14,7 +14,7 @@ export const MovieImagePicker: FC<MovieImagePickerProps> = ({ className, onUploa
   return (
     <label
       className={tw(
-        'bg-input flex cursor-pointer flex-col items-center justify-center rounded-[10px] border-2 border-dashed border-white',
+        'flex cursor-pointer flex-col items-center justify-center rounded-[10px] border-2 border-dashed border-white bg-input',
         className,
       )}
     >

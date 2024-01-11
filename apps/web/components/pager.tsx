@@ -34,7 +34,7 @@ export const Pager: FC<PagerProps> = ({ className, currentPage, totalPages, onPa
           <Button
             key={i}
             variant="clear"
-            className={tw('bg-card h-8 w-8 rounded', currentPage === i && 'bg-primary')}
+            className={tw('h-8 w-8 rounded bg-card', currentPage === i && 'bg-primary')}
             onClick={() => onPage(i)}
           >
             {i + 1}

@@ -75,8 +75,8 @@ export const Field = forwardRef<HTMLInputElement, FieldProps>(
         <input
           ref={ref}
           className={tw(
-            'bg-input w-full rounded-[10px] px-4 py-3',
-            !!error && 'border-error text-error border',
+            'w-full rounded-[10px] bg-input px-4 py-3',
+            !!error && 'border border-error text-error',
             inputClassName,
           )}
           name={name}
