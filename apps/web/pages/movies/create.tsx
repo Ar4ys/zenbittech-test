@@ -1,4 +1,5 @@
 import { GetServerSideProps } from 'next';
+import { useEffect, useState } from 'react';
 import { useController } from 'react-hook-form';
 
 import { Button } from '@/components';
@@ -16,6 +17,10 @@ const CreateMoviePage: NextPageWithLayout = () => {
   const isMobile = useIsMobile();
   const { control, handleSubmit } = useCreateMovieForm();
   const { mutate: createMovie, isPending } = useCreateMovie();
+  const [isMobileDeffered, setIsMobileDeffered] = useState(false);
+
+  // This hack is needed to avoid Hydration error
+  useEffect(() => setIsMobileDeffered(isMobile), [isMobile]);
 
   const { field: imageField, fieldState: imageFieldState } = useController({
     control,
@@ -91,7 +96,7 @@ const CreateMoviePage: NextPageWithLayout = () => {
     </form>
   );
 
-  return isMobile ? mobileView : desktopView;
+  return isMobileDeffered ? mobileView : desktopView;
 };
 
 CreateMoviePage.Layout = ({ children }) => {
