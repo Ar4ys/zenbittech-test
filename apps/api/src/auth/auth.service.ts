@@ -10,7 +10,7 @@ import {
   UserNotFoundError,
 } from '@repo/shared/errors';
 
-import { UserService } from '../user/user.service';
+import { UserService } from '../user';
 import { UserJwtPayloadDto, userJwtPayloadSchema } from './dtos';
 import { SignInData, SignInReturnData, SignUpData, SignUpReturnData } from './types';
 

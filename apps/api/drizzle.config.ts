@@ -3,7 +3,7 @@ import path from 'path';
 import * as dotenv from 'dotenv';
 import type { Config } from 'drizzle-kit';
 
-import { environmentValidator, getEnvironmentFilePath } from './environment';
+import { environmentValidator, getEnvironmentFilePath } from './src/environment';
 
 for (const envFile of getEnvironmentFilePath()) {
   dotenv.config({ path: path.resolve(__dirname, envFile) });

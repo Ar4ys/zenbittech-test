@@ -6,9 +6,9 @@ import { NestFactory, Reflector } from '@nestjs/core';
 import cookieParser from 'cookie-parser';
 import { ZodSerializerInterceptor, ZodValidationPipe } from 'nestjs-zod';
 
-import { HttpExceptionFilter } from './common/exception-filters';
+import { AppModule } from './app';
 import { Environment, NodeEnv } from './environment';
-import { AppModule } from './modules/app';
+import { HttpExceptionFilter } from './exception-filters';
 
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
