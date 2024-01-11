@@ -1,12 +1,13 @@
 {
-  "name": "api",
+  "name": "@repo/api",
   "version": "0.0.0",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
     "format": "prettier --write \"**/*.ts\" \"test/**/*.ts\"",
-    "start:prod": "NODE_ENV=production ts-node ./src/main.ts",
-    "start:staging": "NODE_ENV=staging ts-node ./src/main.ts",
+    "start": "ts-node ./src/main.ts",
+    "start:prod": "NODE_ENV=production pnpm start",
+    "start:staging": "NODE_ENV=staging pnpm start",
     "start:dev": "NODE_ENV=development ts-node-dev --rs --transpile-only --require tsconfig-paths/register ./src/main.ts",
     "start:debug": "NODE_ENV=development ts-node-dev --inspect --rs --transpile-only --require tsconfig-paths/register ./src/main.ts",
     "type-check": "tsc --noEmit",
