@@ -10,5 +10,6 @@ export const contract = c.router(
   {
     pathPrefix: '/api',
     strictStatusCodes: true,
+    validateResponseOnClient: true,
   },
 );

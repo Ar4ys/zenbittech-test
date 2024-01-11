@@ -1,7 +1,12 @@
 import { z } from 'zod';
 
 import { HttpStatus } from '../constants';
-import { MovieNotFoundError, UnauthorizedError, UserIsNotAnEventOwnerError } from '../errors';
+import {
+  InternalServerError,
+  MovieNotFoundError,
+  UnauthorizedError,
+  UserIsNotAnEventOwnerError,
+} from '../errors';
 import { authGuardSchema, c } from './contract';
 
 const movieWithImageSchema = z.object({
@@ -26,6 +31,7 @@ export const movie = c.router(
         page: z.number().min(0).default(0),
       }),
       responses: {
+        [InternalServerError.statusCode]: InternalServerError.zodSchema,
         [UnauthorizedError.statusCode]: authGuardSchema,
         [HttpStatus.OK]: z.object({
           totalPages: z.number(),
@@ -44,6 +50,7 @@ export const movie = c.router(
         publishingYear: z.coerce.number().min(1800),
       }),
       responses: {
+        [InternalServerError.statusCode]: InternalServerError.zodSchema,
         [UnauthorizedError.statusCode]: authGuardSchema,
         [HttpStatus.CREATED]: movieWithImageSchema,
       },
@@ -63,6 +70,7 @@ export const movie = c.router(
         })
         .partial(),
       responses: {
+        [InternalServerError.statusCode]: InternalServerError.zodSchema,
         [UnauthorizedError.statusCode]: authGuardSchema,
         [MovieNotFoundError.statusCode]: MovieNotFoundError.zodSchema,
         [UserIsNotAnEventOwnerError.statusCode]: UserIsNotAnEventOwnerError.zodSchema,
@@ -77,6 +85,7 @@ export const movie = c.router(
       }),
       body: null,
       responses: {
+        [InternalServerError.statusCode]: InternalServerError.zodSchema,
         [UnauthorizedError.statusCode]: authGuardSchema,
         [MovieNotFoundError.statusCode]: MovieNotFoundError.zodSchema,
         [UserIsNotAnEventOwnerError.statusCode]: UserIsNotAnEventOwnerError.zodSchema,

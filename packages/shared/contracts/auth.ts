@@ -1,7 +1,12 @@
 import { z } from 'zod';
 
 import { HttpStatus } from '../constants';
-import { IncorrectPasswordError, UserAlreadyExistsError, UserNotFoundError } from '../errors';
+import {
+  IncorrectPasswordError,
+  InternalServerError,
+  UserAlreadyExistsError,
+  UserNotFoundError,
+} from '../errors';
 import { c } from './contract';
 
 export const auth = c.router(
@@ -15,6 +20,7 @@ export const auth = c.router(
         remember: z.boolean(),
       }),
       responses: {
+        [InternalServerError.statusCode]: InternalServerError.zodSchema,
         [UserAlreadyExistsError.statusCode]: UserAlreadyExistsError.zodSchema,
         [HttpStatus.CREATED]: z.object({
           id: z.number(),
@@ -31,6 +37,7 @@ export const auth = c.router(
         remember: z.boolean(),
       }),
       responses: {
+        [InternalServerError.statusCode]: InternalServerError.zodSchema,
         [UserNotFoundError.statusCode]: UserNotFoundError.zodSchema,
         [IncorrectPasswordError.statusCode]: IncorrectPasswordError.zodSchema,
         [HttpStatus.OK]: z.object({
@@ -44,6 +51,7 @@ export const auth = c.router(
       path: '/sign-out',
       body: null,
       responses: {
+        [InternalServerError.statusCode]: InternalServerError.zodSchema,
         [HttpStatus.OK]: z.object({
           success: z.literal(true),
         }),
@@ -53,5 +61,6 @@ export const auth = c.router(
   {
     pathPrefix: '/auth',
     strictStatusCodes: true,
+    validateResponseOnClient: true,
   },
 );
