@@ -46,7 +46,7 @@ const SignInPage: NextPageWithLayout = () => {
 };
 
 SignInPage.Layout = ({ children }) => {
-  return <div className="flex h-full w-full flex-col justify-center">{children}</div>;
+  return <div className="flex min-h-full w-full grow flex-col justify-center">{children}</div>;
 };
 
 SignInPage.Layout.displayName = 'SignInPage.Layout';

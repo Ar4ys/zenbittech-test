@@ -13,7 +13,26 @@ import { getSession } from '@/utils';
 import { NextPageWithLayout } from './_app';
 
 const MoviesPage: NextPageWithLayout = () => {
-  return <div className=""></div>;
+  const { data } = useGetPaginatedMovies(0);
+
+  const movies = data?.body.movies ?? [];
+
+  return (
+    <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4">
+      {movies.map((movie) => (
+        <div
+          className="bg-card w-full overflow-hidden rounded-xl min-[400px]:min-w-[180px] md:max-h-[504px] md:max-w-[282px]"
+          key={movie.id}
+        >
+          <img src={movie.image.url} className="h-[75%] w-full object-cover" />
+          <div className="flex flex-col gap-4 p-3">
+            <h3 className="text-body-regular">{movie.title}</h3>
+            <p className="text-body-small">{movie.publishingYear}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 };
 
 MoviesPage.Layout = ({ children }) => {
@@ -51,8 +70,8 @@ MoviesPage.Layout = ({ children }) => {
     );
   else
     return (
-      <div className="flex h-full w-full flex-col px-6 pt-20">
-        <div className="flex justify-between">
+      <div className="mx-auto flex h-full w-full max-w-[1200px] flex-col items-center px-6">
+        <div className="flex w-full justify-between py-20">
           <div className="flex gap-3">
             <h1 className="text-h3">My movies</h1>
             <Button variant="clear" onClick={redirectToCreateMovie}>
