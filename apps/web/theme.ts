@@ -8,6 +8,8 @@ export const Color = {
   background: '#093545',
   input: '#224957',
   card: '#092C39',
+  white: '#FFF',
+  black: '#000',
 };
 
 export const TextVariant = {
