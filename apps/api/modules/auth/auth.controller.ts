@@ -47,4 +47,12 @@ export class AuthController {
       );
     });
   }
+
+  @TsRestHandler(contract.auth.signOut)
+  async postSignOut(@Res({ passthrough: true }) res: Response) {
+    return tsRestHandler(contract.auth.signOut, async () => {
+      res.clearCookie(JWT_COOKIE_NAME);
+      return { status: HttpStatus.OK, body: { success: true as const } };
+    });
+  }
 }

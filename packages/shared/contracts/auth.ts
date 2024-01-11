@@ -39,6 +39,16 @@ export const auth = c.router(
         }),
       },
     },
+    signOut: {
+      method: 'DELETE',
+      path: '/sign-out',
+      body: null,
+      responses: {
+        [HttpStatus.OK]: z.object({
+          success: z.literal(true),
+        }),
+      },
+    },
   },
   {
     pathPrefix: '/auth',
