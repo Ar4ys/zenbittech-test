@@ -4,13 +4,26 @@ import { HttpStatus } from '../constants';
 import {
   IncorrectPasswordError,
   InternalServerError,
+  UnauthorizedError,
   UserAlreadyExistsError,
   UserNotFoundError,
 } from '../errors';
-import { c } from './contract';
+import { authGuardSchema, c } from './contract';
 
 export const auth = c.router(
   {
+    me: {
+      method: 'GET',
+      path: '/',
+      headers: null,
+      responses: {
+        [InternalServerError.statusCode]: InternalServerError.zodSchema,
+        [UnauthorizedError.statusCode]: authGuardSchema,
+        [HttpStatus.OK]: z.object({
+          userId: z.number(),
+        }),
+      },
+    },
     signUp: {
       method: 'POST',
       path: '/sign-up',

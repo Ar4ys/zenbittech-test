@@ -1,4 +1,4 @@
-import { Controller, Res } from '@nestjs/common';
+import { Controller, Res, UseGuards } from '@nestjs/common';
 import { TsRest, TsRestHandler, tsRestHandler } from '@ts-rest/nest';
 import { Response } from 'express';
 import { Ok } from 'ts-results';
@@ -7,13 +7,24 @@ import { HttpStatus } from '@repo/shared/constants';
 import { contract } from '@repo/shared/contracts';
 import { toTsRestResponse } from '@repo/shared/utils';
 
+import { AuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';
 import { COOKIE_MAX_AGE, JWT_COOKIE_NAME } from './constants';
+import { User } from './decorators';
+import { UserJwtPayloadDto } from './dtos';
 
 @TsRest({ validateResponses: true })
 @Controller()
 export class AuthController {
   constructor(private authService: AuthService) {}
+
+  @TsRestHandler(contract.auth.me)
+  @UseGuards(AuthGuard)
+  async getMe(@User() user: UserJwtPayloadDto) {
+    return tsRestHandler(contract.auth.me, async () => {
+      return toTsRestResponse(Ok(user), HttpStatus.OK);
+    });
+  }
 
   @TsRestHandler(contract.auth.signUp)
   async postSignUp(@Res({ passthrough: true }) res: Response) {

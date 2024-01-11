@@ -1,9 +1,11 @@
+import { GetServerSideProps } from 'next';
 import Link from 'next/link';
 
 import { Button } from '@/components';
 import { FormCheckbox } from '@/components/form-checkbox';
 import { FormField } from '@/components/form-field';
 import { useSignUp, useSignUpForm } from '@/modules/auth';
+import { getSession } from '@/utils';
 
 import { NextPageWithLayout } from './_app';
 
@@ -50,3 +52,17 @@ SignUpPage.Layout = ({ children }) => {
 SignUpPage.Layout.displayName = 'SignUpPage.Layout';
 
 export default SignUpPage;
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const session = await getSession(ctx);
+
+  if (session) {
+    return { redirect: { destination: '/movies', permanent: false } };
+  }
+
+  return {
+    props: {
+      sessionUserId: null,
+    },
+  };
+};
