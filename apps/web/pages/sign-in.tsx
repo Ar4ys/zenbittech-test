@@ -11,7 +11,7 @@ import { NextPageWithLayout } from './_app';
 
 const SignInPage: NextPageWithLayout = () => {
   const { control, handleSubmit } = useSignInForm();
-  const { mutate: signIn } = useSignIn();
+  const { mutate: signIn, isPending } = useSignIn();
 
   const onSubmit = handleSubmit((values) => {
     signIn({ body: values });
@@ -36,7 +36,7 @@ const SignInPage: NextPageWithLayout = () => {
           type="password"
         />
         <FormCheckbox control={control} name="remember" label="Remember me" />
-        <Button type="submit" className="w-full">
+        <Button type="submit" className="w-full" loading={isPending}>
           Login
         </Button>
         <Link href="/sign-up">Sign up</Link>
