@@ -8,7 +8,6 @@ import { AuthModule } from '../auth/auth.module';
 import { DbModule } from '../db';
 import { UPLOAD_PATH } from '../image';
 import { MovieModule } from '../movie';
-import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 @Module({
@@ -26,7 +25,6 @@ import { AppService } from './app.service';
     }),
     MovieModule,
   ],
-  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
