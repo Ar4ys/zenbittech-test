@@ -32,11 +32,11 @@ const CreateMoviePage: NextPageWithLayout = () => {
   };
 
   const mobileView = (
-    <form className="grid grid-cols-1 gap-6 md:grid-cols-2" onSubmit={onSubmit}>
+    <form className="grid w-full grid-cols-1 gap-6" onSubmit={onSubmit}>
       <FormField control={control} name="title" placeholder="Title" />
       <FormField control={control} name="publishingYear" placeholder="Publishing year" />
       <div>
-        <MovieImagePicker onUpload={handleImagePicker} />
+        <MovieImagePicker className="h-[372px] w-full" onUpload={handleImagePicker} />
         <FormError
           errorText={
             imageFieldState.isTouched &&
@@ -56,9 +56,12 @@ const CreateMoviePage: NextPageWithLayout = () => {
   );
 
   const desktopView = (
-    <form className="grid grid-cols-2 gap-6 md:grid-cols-2" onSubmit={onSubmit}>
+    <form
+      className="grid w-full max-w-[1440px] grid-cols-2 gap-6 md:grid-cols-2"
+      onSubmit={onSubmit}
+    >
       <div className="grow">
-        <MovieImagePicker onUpload={handleImagePicker} />
+        <MovieImagePicker className="h-[473px] w-full max-w-[504px]" onUpload={handleImagePicker} />
         <FormError
           errorText={
             imageFieldState.isTouched &&
@@ -69,7 +72,12 @@ const CreateMoviePage: NextPageWithLayout = () => {
       <div className="flex flex-col">
         <FormField control={control} name="title" placeholder="Title" />
         <div className="pt-6" />
-        <FormField control={control} name="publishingYear" placeholder="Publishing year" />
+        <FormField
+          className="w-[55%]"
+          control={control}
+          name="publishingYear"
+          placeholder="Publishing year"
+        />
         <div className="pt-16" />
         <div className="flex gap-4">
           <Button type="button" variant="secondary" className="w-full">
