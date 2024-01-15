@@ -17,15 +17,15 @@ export class AuthGuard implements CanActivate {
     const token = request.cookies[JWT_COOKIE_NAME];
 
     if (!token) throw new UnauthorizedError('Absent jwt token');
-    const tokenResult = (await this.authService.verifyToken(token))
-      .mapErr((err) =>
-        err instanceof TokenExpiredError
-          ? new SessionExpiredError()
-          : new UnauthorizedError('Unexpected jwt token error', { cause: err }),
-      )
-      .unwrap();
+    const tokenResult = (await this.authService.verifyToken(token)).mapErr((err) =>
+      err instanceof TokenExpiredError
+        ? new SessionExpiredError()
+        : new UnauthorizedError('Unexpected jwt token error', { cause: err }),
+    );
 
-    request[REQUEST_USER_FIELD] = tokenResult;
+    if (tokenResult.err) throw tokenResult.val;
+
+    request[REQUEST_USER_FIELD] = tokenResult.val;
 
     return true;
   }
