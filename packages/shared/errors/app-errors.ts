@@ -1,7 +1,7 @@
 import { BadRequestError, ForbiddenError, NotFoundError, UnauthorizedError } from './http-errors';
 
 export class UserAlreadyExistsError extends BadRequestError.extend(
-  'UserAlreadyExistsException',
+  'UserAlreadyExistsError',
   BadRequestError.statusCode,
 ) {
   constructor(email: string) {
@@ -19,7 +19,7 @@ export class UserNotFoundError extends NotFoundError.extend(
 }
 
 export class SessionExpiredError extends UnauthorizedError.extend(
-  'SessionExpiredException',
+  'SessionExpiredError',
   UnauthorizedError.statusCode,
 ) {
   constructor() {
