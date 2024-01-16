@@ -1,6 +1,6 @@
 import { Controller, Res, UseGuards } from '@nestjs/common';
 import { TsRest, TsRestHandler, tsRestHandler } from '@ts-rest/nest';
-import { Response } from 'express';
+import type { Response } from 'express';
 import { Ok } from 'ts-results';
 
 import { HttpStatus } from '@repo/shared/constants';
