@@ -1,13 +1,9 @@
 import { z } from 'zod';
 
 import { HttpStatus } from '../constants';
-import {
-  InternalServerError,
-  MovieNotFoundError,
-  UnauthorizedError,
-  UserIsNotAnEventOwnerError,
-} from '../errors';
-import { authGuardSchema, c } from './contract';
+import { InternalServerError, MovieNotFoundError, UserIsNotAnEventOwnerError } from '../errors';
+import { tsRestErrorList } from '../utils';
+import { authErrors, c } from './contract';
 
 const movieWithImageSchema = z.object({
   id: z.number(),
@@ -31,8 +27,7 @@ export const movie = c.router(
         page: z.coerce.number().min(0).default(0),
       }),
       responses: {
-        [InternalServerError.statusCode]: InternalServerError.zodSchema,
-        [UnauthorizedError.statusCode]: authGuardSchema,
+        ...tsRestErrorList(InternalServerError, ...authErrors),
         [HttpStatus.OK]: z.object({
           totalPages: z.number(),
           currentPage: z.number(),
@@ -54,8 +49,7 @@ export const movie = c.router(
         publishingYear: z.coerce.number().min(1800),
       }),
       responses: {
-        [InternalServerError.statusCode]: InternalServerError.zodSchema,
-        [UnauthorizedError.statusCode]: authGuardSchema,
+        ...tsRestErrorList(InternalServerError, ...authErrors),
         [HttpStatus.CREATED]: movieWithImageSchema,
       },
     },
@@ -78,10 +72,12 @@ export const movie = c.router(
         })
         .partial(),
       responses: {
-        [InternalServerError.statusCode]: InternalServerError.zodSchema,
-        [UnauthorizedError.statusCode]: authGuardSchema,
-        [MovieNotFoundError.statusCode]: MovieNotFoundError.zodSchema,
-        [UserIsNotAnEventOwnerError.statusCode]: UserIsNotAnEventOwnerError.zodSchema,
+        ...tsRestErrorList(
+          InternalServerError,
+          ...authErrors,
+          MovieNotFoundError,
+          UserIsNotAnEventOwnerError,
+        ),
         [HttpStatus.OK]: movieWithImageSchema,
       },
     },
@@ -93,10 +89,12 @@ export const movie = c.router(
       }),
       body: null,
       responses: {
-        [InternalServerError.statusCode]: InternalServerError.zodSchema,
-        [UnauthorizedError.statusCode]: authGuardSchema,
-        [MovieNotFoundError.statusCode]: MovieNotFoundError.zodSchema,
-        [UserIsNotAnEventOwnerError.statusCode]: UserIsNotAnEventOwnerError.zodSchema,
+        ...tsRestErrorList(
+          InternalServerError,
+          ...authErrors,
+          MovieNotFoundError,
+          UserIsNotAnEventOwnerError,
+        ),
         [HttpStatus.OK]: z.object({
           success: z.literal(true),
         }),

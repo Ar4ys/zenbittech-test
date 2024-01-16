@@ -4,11 +4,11 @@ import { HttpStatus } from '../constants';
 import {
   IncorrectPasswordError,
   InternalServerError,
-  UnauthorizedError,
   UserAlreadyExistsError,
   UserNotFoundError,
 } from '../errors';
-import { authGuardSchema, c } from './contract';
+import { tsRestErrorList } from '../utils';
+import { authErrors, c } from './contract';
 
 export const auth = c.router(
   {
@@ -17,8 +17,7 @@ export const auth = c.router(
       path: '/',
       headers: null,
       responses: {
-        [InternalServerError.statusCode]: InternalServerError.zodSchema,
-        [UnauthorizedError.statusCode]: authGuardSchema,
+        ...tsRestErrorList(InternalServerError, ...authErrors),
         [HttpStatus.OK]: z.object({
           userId: z.number(),
         }),
@@ -33,8 +32,7 @@ export const auth = c.router(
         remember: z.boolean(),
       }),
       responses: {
-        [InternalServerError.statusCode]: InternalServerError.zodSchema,
-        [UserAlreadyExistsError.statusCode]: UserAlreadyExistsError.zodSchema,
+        ...tsRestErrorList(InternalServerError, UserAlreadyExistsError),
         [HttpStatus.CREATED]: z.object({
           id: z.number(),
           email: z.string(),
@@ -50,9 +48,7 @@ export const auth = c.router(
         remember: z.boolean(),
       }),
       responses: {
-        [InternalServerError.statusCode]: InternalServerError.zodSchema,
-        [UserNotFoundError.statusCode]: UserNotFoundError.zodSchema,
-        [IncorrectPasswordError.statusCode]: IncorrectPasswordError.zodSchema,
+        ...tsRestErrorList(InternalServerError, UserNotFoundError, IncorrectPasswordError),
         [HttpStatus.OK]: z.object({
           id: z.number(),
           email: z.string(),
@@ -64,7 +60,7 @@ export const auth = c.router(
       path: '/sign-out',
       body: null,
       responses: {
-        [InternalServerError.statusCode]: InternalServerError.zodSchema,
+        ...tsRestErrorList(InternalServerError),
         [HttpStatus.OK]: z.object({
           success: z.literal(true),
         }),
