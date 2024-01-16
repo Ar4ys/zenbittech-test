@@ -15,8 +15,8 @@ export abstract class BaseHttpError extends Error {
   static extend<TName extends string, TStatus extends HttpStatus>(
     name: TName,
     statusCode: TStatus,
-  ) {
-    return class HttpError extends this {
+  ): HttpErrorConstructor<TName, TStatus> {
+    return class HttpErrorImpl extends this {
       static override statusCode = statusCode;
       static override zodSchema = super.zodSchema.extend({
         name: z.literal(name),
@@ -24,6 +24,30 @@ export abstract class BaseHttpError extends Error {
 
       override name = name;
       override statusCode = statusCode;
+
+      static override extend<T extends string>(name: T) {
+        return super.extend(name, statusCode);
+      }
     };
   }
 }
+
+type Merge<T, K> = Omit<T, keyof K> & K;
+
+type HttpErrorConstructor<TName extends string, TStatus extends HttpStatus> = Merge<
+  typeof Error,
+  {
+    new (...args: ConstructorParameters<typeof BaseHttpError>): HttpError<TName, TStatus>;
+    statusCode: TStatus;
+    zodSchema: ReturnType<typeof BaseHttpError.zodSchema.extend<{ name: z.ZodLiteral<TName> }>>;
+    extend<T extends string>(name: T): HttpErrorConstructor<T, TStatus>;
+  }
+>;
+
+type HttpError<TName extends string, TStatus extends HttpStatus> = Merge<
+  Error,
+  {
+    statusCode: TStatus;
+    name: TName;
+  }
+>;
