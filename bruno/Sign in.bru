@@ -1,0 +1,24 @@
+meta {
+  name: Sign in
+  type: http
+  seq: 28
+}
+
+post {
+  url: http://localhost:3000/api/auth/sign-in
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  User-Agent: insomnia/8.3.0
+}
+
+body:json {
+  {
+  	"email": "yes@test.com",
+  	"password": "123456",
+  	"remember": true
+  }
+}

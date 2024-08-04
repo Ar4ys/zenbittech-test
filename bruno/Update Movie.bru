@@ -1,0 +1,22 @@
+meta {
+  name: Update Movie
+  type: http
+  seq: 25
+}
+
+patch {
+  url: http://localhost:3000/api/movie/2
+  body: multipartForm
+  auth: none
+}
+
+headers {
+  Content-Type: multipart/form-data
+  User-Agent: insomnia/8.3.0
+}
+
+body:multipart-form {
+  image: 
+  publishingYear: 2023
+  ~title: Test Updated
+}

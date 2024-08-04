@@ -1,0 +1,22 @@
+meta {
+  name: Create Movie
+  type: http
+  seq: 24
+}
+
+post {
+  url: http://localhost:3000/api/movie
+  body: multipartForm
+  auth: none
+}
+
+headers {
+  Content-Type: multipart/form-data
+  User-Agent: insomnia/8.3.0
+}
+
+body:multipart-form {
+  image: 
+  title: Test2
+  publishingYear: 2024
+}
